@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "PowerShell: Export Submission",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceFolder}/export-submission.ps1",
+            "args": [
+                "-StudentCode",
+                "QE190031"
+            ]
+        }
+    ]
+}
