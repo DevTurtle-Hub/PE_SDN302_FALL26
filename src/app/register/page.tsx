@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { isValidEmail } from "@/lib/auth";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -69,6 +71,9 @@ export default function RegisterPage() {
       const data = await res.json();
       if (res.ok) {
         setFormSuccess(true);
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
       } else {
         setAuthError(data.error || "Registration failed");
       }
