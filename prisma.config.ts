@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { defineConfig, env } from "prisma/config";
+import { defineConfig } from "prisma/config";
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
@@ -7,7 +7,10 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    // Prisma CLI (migrations, db push) kết nối trực tiếp qua DIRECT_URL (bỏ qua pooler transaction-mode)
-    url: env("DIRECT_URL") || env("DATABASE_URL"),
+    // Prisma CLI dùng DIRECT_URL nếu có, nếu không fallback DATABASE_URL hoặc dummy URL lúc generate
+    url:
+      process.env.DIRECT_URL ||
+      process.env.DATABASE_URL ||
+      "postgresql://postgres:postgres@localhost:5432/postgres",
   },
 });
