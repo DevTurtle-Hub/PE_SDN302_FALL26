@@ -65,10 +65,11 @@ export default function HomePage() {
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-[420px] aspect-square rounded-[2rem] overflow-hidden border border-slate-200/90 dark:border-slate-800 shadow-2xl shadow-blue-600/15 group">
               <Image
-                src="/hero-reading.jpg"
-                alt="ReadLog Modern 3D Open Book Illustration"
+                src="/hero-student.jpg"
+                alt="3D Cartoon Student Reading Book"
                 fill
                 priority
+                unoptimized
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
               {/* Subtle ambient border shine */}
