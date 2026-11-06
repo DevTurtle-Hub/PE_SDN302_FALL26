@@ -10,7 +10,7 @@ export function ReadingLogList() {
 
   if (readingLogs.length === 0) {
     return (
-      <Card className="rounded-[2rem] border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-md shadow-blue-600/5 backdrop-blur-xl p-12 text-center">
+      <Card className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-12 text-center">
         <div className="max-w-md mx-auto space-y-4">
           <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-950 text-blue-600 flex items-center justify-center mx-auto">
             <BookOpen className="w-7 h-7" />
@@ -35,7 +35,7 @@ export function ReadingLogList() {
         <Card
           key={log.id}
           data-testid="reading-log-item"
-          className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all p-5 sm:p-6"
+          className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all p-5 sm:p-6"
         >
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             {/* Left: Book Details */}

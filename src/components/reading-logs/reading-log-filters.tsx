@@ -18,7 +18,7 @@ export function ReadingLogFilters() {
   } = useReadingLogs();
 
   return (
-    <Card className="rounded-[2rem] border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-md shadow-blue-600/5 backdrop-blur-xl p-5 sm:p-6">
+    <Card className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-5 sm:p-6">
       <CardContent className="p-0 flex flex-col sm:flex-row flex-wrap items-center gap-4">
         {/* Search Input - Big & Legible */}
         <div className="relative flex-1 min-w-[220px] w-full sm:w-auto">

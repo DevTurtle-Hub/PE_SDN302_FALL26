@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth-context";
-import { AuthWaveBackground } from "@/components/auth-wave-background";
+import { AppSoftBackground } from "@/components/app-soft-background";
 import { ReadingLogForm } from "@/components/reading-logs/reading-log-form";
 import { ReadingLogFilters } from "@/components/reading-logs/reading-log-filters";
 import { ReadingLogSummaryCard } from "@/components/reading-logs/reading-log-summary";
@@ -30,12 +30,12 @@ export default function ReadingLogsPage() {
       data-testid="reading-logs-page"
       className="relative min-h-[calc(100vh-4rem)] p-3 sm:p-6 lg:p-10 bg-[#f4f6fb] dark:bg-slate-950 overflow-hidden"
     >
-      {/* 3D Wave Ribbon Background */}
-      <AuthWaveBackground />
+      {/* Soft Ambient Background without distracting waves */}
+      <AppSoftBackground />
 
       <div className="relative z-10 container mx-auto max-w-7xl space-y-6">
         {/* Page Top Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-6 rounded-[2rem] bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-xl shadow-blue-500/5 backdrop-blur-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-sm">
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 text-xs font-semibold">
               <Sparkles className="w-3 h-3" />

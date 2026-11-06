@@ -68,7 +68,7 @@ export function ReadingLogForm() {
   };
 
   return (
-    <Card className="rounded-[2rem] border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-lg shadow-blue-600/5 backdrop-blur-xl overflow-hidden p-6 sm:p-8">
+    <Card className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden p-6 sm:p-8">
       <CardHeader className="p-0 pb-6">
         <div className="flex items-center gap-3">
           <div className="w-11 h-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-600/25">
