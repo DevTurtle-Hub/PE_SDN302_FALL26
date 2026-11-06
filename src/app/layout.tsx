@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/auth-context";
+import { ReadingLogsProvider } from "@/context/reading-logs-context";
 import { Header } from "@/components/header";
 
 const geistSans = Geist({
@@ -15,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Practical Exam - SDN302",
-  description: "FPT University Practical Exam SDN302 Fullstack Application",
+  title: "ReadLog - Reading Session Tracker",
+  description: "Track your personal reading sessions, minutes, and genre summaries.",
 };
 
 export default function RootLayout({
@@ -31,8 +32,10 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-100">
         <AuthProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
+          <ReadingLogsProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+          </ReadingLogsProvider>
         </AuthProvider>
       </body>
     </html>

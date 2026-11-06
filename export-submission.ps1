@@ -7,7 +7,8 @@ param (
 
 $StudentCode = $StudentCode.Trim().ToUpper()
 $SubmissionDir = $StudentCode
-$ZipFilePath = Join-Path $SubmissionDir "code.zip"
+$CodeZipPath = Join-Path $SubmissionDir "code.zip"
+$MssvZipPath = Join-Path $SubmissionDir "$StudentCode.zip"
 $TempStagingDir = Join-Path $env:TEMP "staging_$StudentCode"
 
 Write-Host ">>> Dang chuan bi xuat thu muc nop bai: $SubmissionDir..." -ForegroundColor Cyan
@@ -41,10 +42,8 @@ if (Test-Path $OldCodeDir) {
     Remove-Item $OldCodeDir -Recurse -Force
 }
 
-# Xoa file zip cu trong submission dir neu ton tai
-if (Test-Path $ZipFilePath) {
-    Remove-Item $ZipFilePath -Force
-}
+# Xoa cac file zip cu trong submission dir neu ton tai
+Get-ChildItem -Path $SubmissionDir -Filter "*.zip" -ErrorAction SilentlyContinue | Remove-Item -Force
 
 # Tao staging tam thoi de zip
 if (Test-Path $TempStagingDir) {
@@ -60,13 +59,14 @@ foreach ($item in $ItemsToCopy) {
     }
 }
 
-# Nen toan bo noi dung staging vao code.zip nam ben trong thu muc SubmissionDir
-Compress-Archive -Path "$TempStagingDir\*" -DestinationPath $ZipFilePath -Force
+# Nen toan bo noi dung staging vao code.zip va $StudentCode.zip
+Compress-Archive -Path "$TempStagingDir\*" -DestinationPath $CodeZipPath -Force
+Copy-Item -Path $CodeZipPath -Destination $MssvZipPath -Force
 
 # Don dep thu muc staging tam
 Remove-Item $TempStagingDir -Recurse -Force
 
-Write-Host ">>> Da tao file zip source code tai: $ZipFilePath" -ForegroundColor Green
+Write-Host ">>> Da tao file zip source code tai: $CodeZipPath va $MssvZipPath" -ForegroundColor Green
 Write-Host ">>> Noi dung zip bao gom: $($CopiedItems -join ', ')" -ForegroundColor Yellow
 Write-Host ">>> KHONG chua: node_modules, .next, .git, .env" -ForegroundColor Green
-Write-Host ">>> Thu muc nop bai $SubmissionDir hien tai chi gom: '$StudentCode.docx' va 'code.zip'" -ForegroundColor Cyan
+Write-Host ">>> Thu muc nop bai $SubmissionDir gom: '$StudentCode.docx', 'code.zip', '$StudentCode.zip'" -ForegroundColor Cyan

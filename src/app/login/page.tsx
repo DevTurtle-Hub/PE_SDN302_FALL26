@@ -14,7 +14,7 @@ import {
   Lock, 
   Eye, 
   EyeOff, 
-  Wallet, 
+  BookOpen, 
   ArrowRight, 
   AlertCircle, 
   Loader2, 
@@ -72,7 +72,7 @@ export default function LoginPage() {
       const data = await res.json();
       if (res.ok) {
         await checkAuth();
-        router.push("/");
+        router.push("/reading-logs");
       } else {
         setAuthError(data.error || "Login failed");
       }
@@ -94,11 +94,11 @@ export default function LoginPage() {
         {/* Top bar header inside canvas */}
         <div className="relative z-10 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-sky-400 text-white flex items-center justify-center shadow-md shadow-blue-500/20">
-              <Wallet className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center shadow-md shadow-blue-500/20">
+              <BookOpen className="w-5 h-5" />
             </div>
             <span className="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
-              SDN302 Exam
+              ReadLog
             </span>
           </div>
 

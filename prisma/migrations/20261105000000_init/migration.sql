@@ -12,29 +12,28 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
-CREATE TABLE "expenses" (
+CREATE TABLE "reading_logs" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "amount" DOUBLE PRECISION NOT NULL,
-    "category" TEXT NOT NULL,
+    "bookTitle" TEXT NOT NULL,
+    "minutesRead" INTEGER NOT NULL,
+    "genre" TEXT NOT NULL,
     "note" TEXT NOT NULL DEFAULT '',
-    "starred" BOOLEAN NOT NULL DEFAULT false,
-    "spentAt" TEXT NOT NULL,
+    "favorite" BOOLEAN NOT NULL DEFAULT false,
+    "readOn" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "expenses_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "reading_logs_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
-CREATE INDEX "expenses_userId_idx" ON "expenses"("userId");
+CREATE INDEX "reading_logs_userId_idx" ON "reading_logs"("userId");
 
 -- CreateIndex
-CREATE INDEX "expenses_userId_spentAt_idx" ON "expenses"("userId", "spentAt");
+CREATE INDEX "reading_logs_userId_readOn_idx" ON "reading_logs"("userId", "readOn");
 
 -- AddForeignKey
-ALTER TABLE "expenses" ADD CONSTRAINT "expenses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
+ALTER TABLE "reading_logs" ADD CONSTRAINT "reading_logs_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;

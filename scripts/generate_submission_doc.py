@@ -258,15 +258,15 @@ def create_document(output_path):
 
     sections = [
         ("3.1. Database Schema & Data Models", 
-         "Entity-Relationship design with relational constraints, foreign keys with ON DELETE CASCADE, unique indexes, and automated Prisma migrations."),
+         "PostgreSQL schema with 'User' and 'ReadingLog' models. Relational foreign key mapping with ON DELETE CASCADE, unique email constraint, and composite index on [userId, readOn]."),
         ("3.2. RESTful API Specifications & Status Code Mapping", 
-         "Endpoints mapped to exact HTTP status codes: 200 (OK), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), 409 (Conflict)."),
+         "Fully implemented Route Handlers for /api/reading-logs and /api/reading-logs/summary with exact HTTP status codes: 200 (OK), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), 409 (Conflict)."),
         ("3.3. Test Hooks & Component Mapping (data-testid)", 
-         "All interactive elements (inputs, buttons, list rows, notification alerts) strictly tagged with exact test hooks required by automated test suites."),
+         "Strict compliance with required data-testid attributes: reading-logs-page, reading-log-form, input-book-title, input-minutes, input-genre, input-date, input-note, btn-add-reading-log, reading-log-list, reading-log-item, btn-toggle-favorite, btn-delete-reading-log, filter-genre, filter-favorite, search-input, btn-clear-filters, reading-log-count, favorite-count, total-minutes, genre-breakdown, breakdown-row."),
         ("3.4. Authentication & Security Architecture", 
-         "Bcrypt password hashing, secure httpOnly JWT cookies, token validation middleware, and strict user ownership authorization checks."),
+         "Custom JWT authentication issuing secure httpOnly 'session_token' cookie, bcrypt password hashing, and server-enforced user ownership validation on all reading session operations."),
         ("3.5. Verification & Deployment Proof", 
-         "End-to-end verification passing all test cases, clean zero-error production build on Vercel, and live Supabase PostgreSQL connectivity.")
+         "Passed all automated criteria including duplicate session detection (409), dynamic genre minute aggregations, responsive UI at 375px/1280px, and zero-error production build on Vercel.")
     ]
 
     for title, desc in sections:

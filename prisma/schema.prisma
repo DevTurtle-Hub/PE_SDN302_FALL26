@@ -1,4 +1,4 @@
-// Prisma Schema for PE_SDN302
+// Prisma Schema for PE_SDN302 - ReadLog
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -9,10 +9,29 @@ datasource db {
 }
 
 model User {
-  id           String    @id @default(uuid())
-  email        String    @unique
+  id           String       @id @default(uuid())
+  email        String       @unique
   passwordHash String
-  createdAt    DateTime  @default(now())
+  createdAt    DateTime     @default(now())
+  readingLogs  ReadingLog[]
 
   @@map("users")
+}
+
+model ReadingLog {
+  id          String   @id @default(uuid())
+  userId      String
+  bookTitle   String
+  minutesRead Int
+  genre       String
+  note        String   @default("")
+  favorite    Boolean  @default(false)
+  readOn      String   // Date formatted as YYYY-MM-DD
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, readOn])
+  @@map("reading_logs")
 }
