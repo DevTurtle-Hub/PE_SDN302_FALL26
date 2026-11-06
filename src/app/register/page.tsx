@@ -123,7 +123,7 @@ export default function RegisterPage() {
             <span>Already registered?</span>
             <Link
               href="/login"
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-sm shadow-blue-500/20 transition-all cursor-pointer text-xs uppercase tracking-wider"
+              className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-500/20 transition-all cursor-pointer text-xs uppercase tracking-wider font-bold"
             >
               Sign In
             </Link>
@@ -281,7 +281,7 @@ export default function RegisterPage() {
                     data-testid="register-submit"
                     type="submit"
                     disabled={loading}
-                    className="w-full h-12 rounded-xl text-base font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-md shadow-indigo-500/25 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer mt-3"
+                    className="w-full h-12 rounded-xl text-base font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-600/25 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer mt-3"
                   >
                     {loading ? (
                       <>

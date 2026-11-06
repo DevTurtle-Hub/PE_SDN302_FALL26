@@ -68,86 +68,86 @@ export function ReadingLogForm() {
   };
 
   return (
-    <Card className="rounded-[2rem] border border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 shadow-xl shadow-blue-500/5 backdrop-blur-xl overflow-hidden transition-all">
-      <CardHeader className="pb-4 px-6 pt-6">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 text-white flex items-center justify-center shadow-md shadow-blue-500/20">
-            <Plus className="w-5 h-5" />
+    <Card className="rounded-[2rem] border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 shadow-lg shadow-blue-600/5 backdrop-blur-xl overflow-hidden p-6 sm:p-8">
+      <CardHeader className="p-0 pb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-600/25">
+            <Plus className="w-6 h-6 stroke-[2.5]" />
           </div>
           <div>
-            <CardTitle className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+            <CardTitle className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
               Add Reading Session
             </CardTitle>
-            <CardDescription className="text-xs text-slate-500 dark:text-slate-400">
-              Record books, time spent, and categories
+            <CardDescription className="text-sm text-slate-500 dark:text-slate-400 font-medium pt-0.5">
+              Record new book session details and categories
             </CardDescription>
           </div>
         </div>
       </CardHeader>
 
-      <CardContent className="px-6 pb-6">
+      <CardContent className="p-0">
         <form
           data-testid="reading-log-form"
           noValidate
           onSubmit={handleSubmit}
-          className="space-y-4"
+          className="space-y-5"
         >
           {/* Success Notification */}
           {successMessage && (
             <div
               data-testid="reading-log-success"
-              className="flex items-center gap-2.5 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800 text-xs font-semibold animate-in fade-in"
+              className="flex items-center gap-2.5 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-sm font-semibold animate-in fade-in"
             >
-              <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600" />
+              <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-600" />
               <span>{successMessage}</span>
             </div>
           )}
 
-          {/* API Error Notification (duplicate, etc.) */}
+          {/* API Error Notification */}
           {apiError && (
             <div
               data-testid="error-reading-log"
-              className="flex items-center gap-2.5 p-3 rounded-xl bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 border border-red-200/60 dark:border-red-900/50 text-xs font-medium animate-in fade-in"
+              className="flex items-center gap-2.5 p-4 rounded-2xl bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-900 text-sm font-medium animate-in fade-in"
             >
-              <AlertCircle className="w-4 h-4 shrink-0" />
+              <AlertCircle className="w-5 h-5 shrink-0 text-red-600" />
               <span>{apiError}</span>
             </div>
           )}
 
-          {/* Book Title */}
-          <div className="space-y-1">
-            <Label htmlFor="bookTitle" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+          {/* Book Title Field */}
+          <div className="space-y-1.5">
+            <Label htmlFor="bookTitle" className="text-sm font-bold text-slate-800 dark:text-slate-200">
               Book Title <span className="text-red-500">*</span>
             </Label>
             <div className="relative">
-              <BookOpen className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
               <Input
                 id="bookTitle"
                 data-testid="input-book-title"
                 type="text"
-                placeholder="e.g. Atomic Habits"
+                placeholder="Enter book title (e.g. Atomic Habits)"
                 value={bookTitle}
                 onChange={(e) => setBookTitle(e.target.value)}
-                className="pl-10 h-10 rounded-xl bg-slate-50/70 dark:bg-slate-800/50 border-slate-200/80 dark:border-slate-700 text-sm focus-visible:ring-blue-500/20"
+                className="pl-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-300 dark:border-slate-700 text-base text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-blue-500/25 focus-visible:border-blue-600 font-medium"
               />
             </div>
             {titleError && (
-              <p data-testid="error-book-title" className="text-xs text-red-500 font-medium flex items-center gap-1 pt-0.5">
-                <AlertCircle className="w-3 h-3" />
+              <p data-testid="error-book-title" className="text-xs sm:text-sm text-red-600 font-medium flex items-center gap-1.5 pt-1">
+                <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{titleError}</span>
               </p>
             )}
           </div>
 
           {/* Minutes Read & Genre in 2 Columns */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Minutes Read */}
-            <div className="space-y-1">
-              <Label htmlFor="minutesRead" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <div className="space-y-1.5">
+              <Label htmlFor="minutesRead" className="text-sm font-bold text-slate-800 dark:text-slate-200">
                 Minutes Read <span className="text-red-500">*</span>
               </Label>
               <div className="relative">
-                <Clock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
                 <Input
                   id="minutesRead"
                   data-testid="input-minutes"
@@ -155,30 +155,30 @@ export function ReadingLogForm() {
                   placeholder="e.g. 45"
                   value={minutesRead}
                   onChange={(e) => setMinutesRead(e.target.value)}
-                  className="pl-10 h-10 rounded-xl bg-slate-50/70 dark:bg-slate-800/50 border-slate-200/80 dark:border-slate-700 text-sm focus-visible:ring-blue-500/20"
+                  className="pl-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-300 dark:border-slate-700 text-base text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-blue-500/25 focus-visible:border-blue-600 font-medium"
                 />
               </div>
               {minutesError && (
-                <p data-testid="error-minutes" className="text-xs text-red-500 font-medium flex items-center gap-1 pt-0.5">
-                  <AlertCircle className="w-3 h-3" />
+                <p data-testid="error-minutes" className="text-xs sm:text-sm text-red-600 font-medium flex items-center gap-1.5 pt-1">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{minutesError}</span>
                 </p>
               )}
             </div>
 
-            {/* Genre */}
-            <div className="space-y-1">
-              <Label htmlFor="genre" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+            {/* Genre Select */}
+            <div className="space-y-1.5">
+              <Label htmlFor="genre" className="text-sm font-bold text-slate-800 dark:text-slate-200">
                 Genre <span className="text-red-500">*</span>
               </Label>
               <div className="relative">
-                <Bookmark className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                <Bookmark className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
                 <select
                   id="genre"
                   data-testid="input-genre"
                   value={genre}
                   onChange={(e) => setGenre(e.target.value)}
-                  className="w-full pl-10 pr-3 h-10 rounded-xl bg-slate-50/70 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700 text-sm text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all cursor-pointer"
+                  className="w-full pl-12 pr-4 h-12 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-300 dark:border-slate-700 text-base text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/25 focus:border-blue-600 font-medium cursor-pointer transition-all"
                 >
                   <option value="">Choose genre</option>
                   <option value="Fiction">Fiction</option>
@@ -189,8 +189,8 @@ export function ReadingLogForm() {
                 </select>
               </div>
               {genreError && (
-                <p data-testid="error-genre" className="text-xs text-red-500 font-medium flex items-center gap-1 pt-0.5">
-                  <AlertCircle className="w-3 h-3" />
+                <p data-testid="error-genre" className="text-xs sm:text-sm text-red-600 font-medium flex items-center gap-1.5 pt-1">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{genreError}</span>
                 </p>
               )}
@@ -198,36 +198,36 @@ export function ReadingLogForm() {
           </div>
 
           {/* Date (readOn) */}
-          <div className="space-y-1">
-            <Label htmlFor="readOn" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+          <div className="space-y-1.5">
+            <Label htmlFor="readOn" className="text-sm font-bold text-slate-800 dark:text-slate-200">
               Date <span className="text-red-500">*</span>
             </Label>
             <div className="relative">
-              <Calendar className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
               <Input
                 id="readOn"
                 data-testid="input-date"
                 type="date"
                 value={readOn}
                 onChange={(e) => setReadOn(e.target.value)}
-                className="pl-10 h-10 rounded-xl bg-slate-50/70 dark:bg-slate-800/50 border-slate-200/80 dark:border-slate-700 text-sm focus-visible:ring-blue-500/20"
+                className="pl-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-300 dark:border-slate-700 text-base text-slate-900 dark:text-slate-100 focus-visible:ring-blue-500/25 focus-visible:border-blue-600 font-medium"
               />
             </div>
             {dateError && (
-              <p data-testid="error-date" className="text-xs text-red-500 font-medium flex items-center gap-1 pt-0.5">
-                <AlertCircle className="w-3 h-3" />
+              <p data-testid="error-date" className="text-xs sm:text-sm text-red-600 font-medium flex items-center gap-1.5 pt-1">
+                <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{dateError}</span>
               </p>
             )}
           </div>
 
-          {/* Note (optional) */}
-          <div className="space-y-1">
-            <Label htmlFor="note" className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+          {/* Note Field (Optional) */}
+          <div className="space-y-1.5">
+            <Label htmlFor="note" className="text-sm font-bold text-slate-800 dark:text-slate-200">
               Note (optional)
             </Label>
             <div className="relative">
-              <FileText className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              <FileText className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
               <Input
                 id="note"
                 data-testid="input-note"
@@ -235,7 +235,7 @@ export function ReadingLogForm() {
                 placeholder="e.g. Chapter 1-3, key takeaways"
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                className="pl-10 h-10 rounded-xl bg-slate-50/70 dark:bg-slate-800/50 border-slate-200/80 dark:border-slate-700 text-sm focus-visible:ring-blue-500/20"
+                className="pl-12 h-12 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-slate-300 dark:border-slate-700 text-base text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus-visible:ring-blue-500/25 focus-visible:border-blue-600 font-medium"
               />
             </div>
           </div>
@@ -245,16 +245,16 @@ export function ReadingLogForm() {
             data-testid="btn-add-reading-log"
             type="submit"
             disabled={submitting}
-            className="w-full h-11 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold text-sm shadow-md shadow-blue-500/20 flex items-center justify-center gap-2 cursor-pointer transition-all mt-2"
+            className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-base shadow-md shadow-blue-600/20 flex items-center justify-center gap-2 cursor-pointer transition-all mt-2"
           >
             {submitting ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-5 h-5 animate-spin" />
                 <span>Saving...</span>
               </>
             ) : (
               <>
-                <Plus className="w-4 h-4" />
+                <Plus className="w-5 h-5 stroke-[2.5]" />
                 <span>Add Reading Session</span>
               </>
             )}
@@ -264,4 +264,3 @@ export function ReadingLogForm() {
     </Card>
   );
 }
-
