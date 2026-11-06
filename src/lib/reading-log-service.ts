@@ -25,25 +25,29 @@ export async function getUserReadingLogs(
   userId: string,
   filters: ReadingLogFilterOptions = {}
 ): Promise<ReadingLog[]> {
-  const where: any = { userId };
+  const andConditions: any[] = [{ userId }];
 
   if (filters.genre && filters.genre.trim() !== "") {
-    where.genre = filters.genre.trim();
+    andConditions.push({ genre: filters.genre.trim() });
   }
 
   if (filters.favorite !== undefined) {
     if (filters.favorite === true || filters.favorite === "true") {
-      where.favorite = true;
+      andConditions.push({ favorite: true });
     }
   }
 
   if (filters.q && filters.q.trim() !== "") {
     const query = filters.q.trim();
-    where.OR = [
-      { bookTitle: { contains: query, mode: "insensitive" } },
-      { note: { contains: query, mode: "insensitive" } }
-    ];
+    andConditions.push({
+      OR: [
+        { bookTitle: { contains: query, mode: "insensitive" } },
+        { note: { contains: query, mode: "insensitive" } }
+      ]
+    });
   }
+
+  const where = andConditions.length > 1 ? { AND: andConditions } : andConditions[0];
 
   const logs = await prisma.readingLog.findMany({
     where
@@ -263,3 +267,4 @@ export async function deleteReadingLog(userId: string, logId: string): Promise<b
 
   return true;
 }
+

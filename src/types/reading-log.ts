@@ -48,3 +48,4 @@ export interface UpdateReadingLogInput {
   readOn?: string;
   favorite?: boolean;
 }
+

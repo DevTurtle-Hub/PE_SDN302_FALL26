@@ -13,10 +13,12 @@ export interface ValidationResult {
 
 export function getTodayDateString(): string {
   const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
+  const utcStr = now.toISOString().slice(0, 10);
+  const localYear = now.getFullYear();
+  const localMonth = String(now.getMonth() + 1).padStart(2, "0");
+  const localDay = String(now.getDate()).padStart(2, "0");
+  const localStr = `${localYear}-${localMonth}-${localDay}`;
+  return localStr > utcStr ? localStr : utcStr;
 }
 
 export function validateReadingLogInput(
@@ -80,3 +82,4 @@ export function validateReadingLogInput(
 
   return { isValid, errors, firstError };
 }
+
