@@ -37,3 +37,4 @@ CREATE INDEX "expenses_userId_spentAt_idx" ON "expenses"("userId", "spentAt");
 
 -- AddForeignKey
 ALTER TABLE "expenses" ADD CONSTRAINT "expenses_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+

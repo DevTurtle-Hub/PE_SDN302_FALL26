@@ -83,3 +83,4 @@ export function SpendingSummary({ summary }: SpendingSummaryProps) {
     </Card>
   );
 }
+

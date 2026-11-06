@@ -49,6 +49,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## 4. QUY TRÌNH NỘP BÀI TỰ ĐỘNG
 - Luôn sẵn sàng thư mục nộp bài chuẩn `MSSV` (ví dụ: `QE190031`) gồm:
   - File Word `MSSV.docx` với đầy đủ thông tin: Mã SV, Họ tên, Link GitHub public, Link Vercel Production, Test account email/password.
-  - Thư mục `code` chứa source code sạch (không có `node_modules`, `.next`, `.git`, `.env`).
+  - File zip mã nguồn `code.zip` chứa source code sạch (không có `node_modules`, `.next`, `.git`, `.env`), không để thư mục code thô bên ngoài.
 - Khi người dùng yêu cầu đóng gói hoặc chuẩn bị nộp bài, kích hoạt script `export-submission.ps1` để đồng bộ bài nộp nhanh chóng và chính xác.
 
