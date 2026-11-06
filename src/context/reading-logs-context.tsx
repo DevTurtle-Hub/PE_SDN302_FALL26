@@ -30,6 +30,7 @@ interface ReadingLogsContextType {
   clearFilters: () => void;
   clearMessages: () => void;
   addReadingLog: (input: CreateReadingLogInput) => Promise<{ ok: boolean; error?: string }>;
+  updateReadingLogItem: (id: string, input: Partial<CreateReadingLogInput>) => Promise<{ ok: boolean; error?: string }>;
   toggleFavorite: (id: string) => Promise<void>;
   deleteLog: (id: string) => Promise<void>;
   refresh: () => Promise<void>;
@@ -176,6 +177,29 @@ export function ReadingLogsProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const updateReadingLogItem = async (
+    id: string,
+    input: Partial<CreateReadingLogInput>
+  ): Promise<{ ok: boolean; error?: string }> => {
+    try {
+      const res = await fetch(`/api/reading-logs/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(input)
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        return { ok: false, error: data.error || "Failed to update reading session" };
+      }
+
+      await fetchData(genreFilter, favoriteFilter, searchQuery);
+      return { ok: true };
+    } catch {
+      return { ok: false, error: "Network error while updating reading session" };
+    }
+  };
+
   const toggleFavorite = async (id: string) => {
     const target = readingLogs.find((item) => item.id === id);
     if (!target) return;
@@ -233,6 +257,7 @@ export function ReadingLogsProvider({ children }: { children: ReactNode }) {
         clearFilters,
         clearMessages,
         addReadingLog,
+        updateReadingLogItem,
         toggleFavorite,
         deleteLog,
         refresh
