@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/auth-context";
-import { ExpensesProvider } from "@/context/expenses-context";
 import { Header } from "@/components/header";
 
 const geistSans = Geist({
@@ -16,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ExpenseTrail - Personal Expense Tracker",
-  description: "Track your personal expenses, categories, and spending live.",
+  title: "Practical Exam - SDN302",
+  description: "FPT University Practical Exam SDN302 Fullstack Application",
 };
 
 export default function RootLayout({
@@ -32,10 +31,8 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-zinc-950 dark:text-zinc-100">
         <AuthProvider>
-          <ExpensesProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-          </ExpensesProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
         </AuthProvider>
       </body>
     </html>

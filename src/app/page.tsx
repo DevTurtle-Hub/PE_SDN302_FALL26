@@ -10,33 +10,32 @@ export default function HomePage() {
           data-testid="home-title"
           className="text-4xl sm:text-5xl font-extrabold tracking-tight"
         >
-          ExpenseTrail
+          SDN302 Practical Exam
         </h1>
         <p className="text-lg text-muted-foreground">
-          Track your personal expenses, organize spending by categories, highlight important items with stars, and view real-time breakdown summaries.
+          Fullstack Web Application powered by Next.js 16 App Router, TypeScript, Tailwind CSS, ShadCN UI, Prisma ORM, and Supabase PostgreSQL.
         </p>
         <div className="flex justify-center gap-4 pt-4">
           <Link href="/register">
-            <Button size="lg">Get Started</Button>
+            <Button size="lg" data-testid="btn-hero-register">Get Started</Button>
           </Link>
           <Link href="/login">
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="lg" data-testid="btn-hero-login">
               Sign In
             </Button>
           </Link>
         </div>
       </div>
 
-      {/* Feature cards (At least 3 required) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
         <Card className="p-6">
           <CardHeader className="p-0 space-y-2">
             <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold">
               1
             </div>
-            <CardTitle className="text-xl">Track spending</CardTitle>
+            <CardTitle className="text-xl">Authentication</CardTitle>
             <CardDescription className="text-sm">
-              Record daily expenses with dates, notes, and amounts accurately formatted to two decimal places.
+              Secure authentication with bcrypt password hashing and HTTP-only JWT session cookies.
             </CardDescription>
           </CardHeader>
         </Card>
@@ -46,9 +45,9 @@ export default function HomePage() {
             <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold">
               2
             </div>
-            <CardTitle className="text-xl">Sort into categories</CardTitle>
+            <CardTitle className="text-xl">Clean Architecture</CardTitle>
             <CardDescription className="text-sm">
-              Organize into Food, Transport, Bills, Shopping, and Other to keep your budget clean and searchable.
+              Standard RESTful API endpoints, strict HTTP status codes, and modular service layers.
             </CardDescription>
           </CardHeader>
         </Card>
@@ -58,9 +57,9 @@ export default function HomePage() {
             <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold">
               3
             </div>
-            <CardTitle className="text-xl">See where it goes</CardTitle>
+            <CardTitle className="text-xl">Cloud Database</CardTitle>
             <CardDescription className="text-sm">
-              Instant summary counts, starred expenses, total expenditures, and dynamic category breakdowns.
+              Powered by Supabase PostgreSQL and Prisma ORM with automated migrations.
             </CardDescription>
           </CardHeader>
         </Card>

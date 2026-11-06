@@ -72,7 +72,7 @@ export default function LoginPage() {
       const data = await res.json();
       if (res.ok) {
         await checkAuth();
-        router.push("/expenses");
+        router.push("/");
       } else {
         setAuthError(data.error || "Login failed");
       }
@@ -98,7 +98,7 @@ export default function LoginPage() {
               <Wallet className="w-5 h-5" />
             </div>
             <span className="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
-              ExpenseTrail
+              SDN302 Exam
             </span>
           </div>
 
@@ -119,14 +119,14 @@ export default function LoginPage() {
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3.5">
               <p className="text-2xl sm:text-3xl font-medium text-slate-700 dark:text-slate-300">
-                Manage personal finances
+                FPT University Practical Exam
               </p>
               <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 leading-tight">
-                Live expense tracking <span className="inline-flex items-center align-middle mx-1.5 text-sky-500"><Sparkles className="w-8 h-8 sm:w-10 sm:h-10 animate-pulse" /></span> and category insights
+                Secure Authentication <span className="inline-flex items-center align-middle mx-1.5 text-sky-500"><Sparkles className="w-8 h-8 sm:w-10 sm:h-10 animate-pulse" /></span> and Fullstack Architecture
               </h1>
             </div>
             <p className="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed">
-              Track daily expenses, categorize transactions into Food, Transport, and Bills, and view real-time spending summaries.
+              Enterprise fullstack application with Next.js 16 App Router, PostgreSQL database, and automated testing suites.
             </p>
           </div>
 
@@ -138,7 +138,7 @@ export default function LoginPage() {
                   Log in to continue<span className="text-blue-500">.</span>
                 </CardTitle>
                 <CardDescription className="text-sm text-slate-400 dark:text-slate-500 pt-1">
-                  Enter your credentials to access your expenses
+                  Enter your credentials to access your account
                 </CardDescription>
               </CardHeader>
 
@@ -252,7 +252,7 @@ export default function LoginPage() {
 
         {/* Bottom footer bar */}
         <div className="relative z-10 flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-100/80 dark:border-slate-800/80">
-          <span>ExpenseTrail • SDN302 Practical Exam</span>
+          <span>SDN302 Practical Exam • FPT University</span>
           <span className="hidden sm:inline">Protected by End-to-End JWT Session Token</span>
         </div>
 
