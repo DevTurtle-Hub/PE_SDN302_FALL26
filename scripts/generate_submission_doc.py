@@ -1,16 +1,15 @@
-import os
 import docx
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
-from docx.oxml import parse_xml, OxmlElement
-from docx.oxml.ns import nsdecls, qn
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.oxml import parse_xml
+from docx.oxml.ns import nsdecls
 
 def set_cell_shading(cell, hex_color):
     shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="{hex_color}"/>')
     cell._tc.get_or_add_tcPr().append(shd)
 
-def set_cell_margins(cell, top=140, bottom=140, left=180, right=180):
+def set_cell_margins(cell, top=120, bottom=120, left=160, right=160):
     tcMar = parse_xml(f'''
         <w:tcMar {nsdecls("w")}>
             <w:top w:w="{top}" w:type="dxa"/>
@@ -56,21 +55,21 @@ def add_hyperlink(paragraph, url, text, color="1D4ED8", underline=True):
 def create_document(output_path):
     doc = docx.Document()
 
-    # Setup page margins: 0.8 inch all sides
+    # Standard 0.8 inch page margins
     for section in doc.sections:
         section.top_margin = Inches(0.8)
         section.bottom_margin = Inches(0.8)
         section.left_margin = Inches(0.8)
         section.right_margin = Inches(0.8)
 
-    # Header section
+    # University & Department Header
     p_inst = doc.add_paragraph()
     p_inst.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r_inst = p_inst.add_run("FPT UNIVERSITY • DEPARTMENT OF SOFTWARE ENGINEERING")
     r_inst.font.name = "Calibri"
     r_inst.font.size = Pt(10)
     r_inst.font.bold = True
-    r_inst.font.color.rgb = RGBColor(100, 116, 139) # Slate 500
+    r_inst.font.color.rgb = RGBColor(100, 116, 139)
 
     p_course = doc.add_paragraph()
     p_course.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -78,71 +77,70 @@ def create_document(output_path):
     r_course.font.name = "Calibri"
     r_course.font.size = Pt(11)
     r_course.font.bold = True
-    r_course.font.color.rgb = RGBColor(30, 58, 138) # Navy 900
+    r_course.font.color.rgb = RGBColor(30, 58, 138)
     p_course.paragraph_format.space_after = Pt(4)
 
+    # Main Report Title
     p_title = doc.add_paragraph()
     p_title.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r_title = p_title.add_run("PRACTICAL EXAM SUBMISSION REPORT")
     r_title.font.name = "Calibri"
-    r_title.font.size = Pt(20)
+    r_title.font.size = Pt(18)
     r_title.font.bold = True
-    r_title.font.color.rgb = RGBColor(15, 23, 42) # Slate 900
+    r_title.font.color.rgb = RGBColor(15, 23, 42)
     p_title.paragraph_format.space_after = Pt(2)
 
     p_sub = doc.add_paragraph()
     p_sub.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    r_sub = p_sub.add_run("BÁO CÁO BÀI THI THỰC HÀNH CHÍNH THỨC — SEMESTER: FALL 2026")
+    r_sub = p_sub.add_run("Semester: Fall 2026 • Official Assessment")
     r_sub.font.name = "Calibri"
     r_sub.font.size = Pt(10)
     r_sub.font.italic = True
     r_sub.font.color.rgb = RGBColor(100, 116, 139)
-    p_sub.paragraph_format.space_after = Pt(18)
+    p_sub.paragraph_format.space_after = Pt(16)
 
-    # Section 1 Heading
+    # Section 1: Candidate & Deployment Information
     p_h1 = doc.add_paragraph()
-    r_h1 = p_h1.add_run("1. CANDIDATE & DEPLOYMENT CREDENTIALS (THÔNG TIN BẮT BUỘC)")
+    r_h1 = p_h1.add_run("1. CANDIDATE & DEPLOYMENT INFORMATION")
     r_h1.font.name = "Calibri"
-    r_h1.font.size = Pt(12)
+    r_h1.font.size = Pt(11)
     r_h1.font.bold = True
     r_h1.font.color.rgb = RGBColor(30, 58, 138)
     p_h1.paragraph_format.space_after = Pt(6)
 
-    # Table 1: Candidate & Credential Info
     t1 = doc.add_table(rows=7, cols=2)
     t1.alignment = WD_TABLE_ALIGNMENT.CENTER
     set_table_borders(t1, color="94A3B8", sz="6")
 
-    col_widths = [Inches(2.3), Inches(4.5)]
+    col_widths1 = [Inches(2.2), Inches(4.6)]
     for row in t1.rows:
-        for i, w in enumerate(col_widths):
+        for i, w in enumerate(col_widths1):
             row.cells[i].width = w
 
     fields = [
-        ("Student Code (MSSV)", "QE190031", False),
-        ("Full Name (Họ và Tên)", "Nguyen Van Quy", False),
-        ("GitHub Repository URL", "https://github.com/DevTurtle-Hub/PE_SDN302_FALL26", True),
+        ("Student ID", "QE190031", False),
+        ("Full Name", "Nguyen Van Quy", False),
+        ("GitHub Repository", "https://github.com/DevTurtle-Hub/PE_SDN302_FALL26", True),
         ("Vercel Production URL", "https://pe-sdn-302-fall-26.vercel.app", True),
-        ("Test Account Email", "grader.qe190031@example.com", False),
-        ("Test Account Password", "Test1234!", False),
-        ("Account Registration Note", "Account was registered directly via application Register API/Page into live Supabase PostgreSQL DB before submission.", False)
+        ("Test Grader Email", "grader.qe190031@example.com", False),
+        ("Test Grader Password", "Test1234!", False),
+        ("Account Provisioning", "Registered directly via application Register API into production Supabase PostgreSQL DB.", False)
     ]
 
     for idx, (label, val, is_link) in enumerate(fields):
         c0, c1 = t1.rows[idx].cells
-        set_cell_margins(c0, top=100, bottom=100, left=140, right=140)
-        set_cell_margins(c1, top=100, bottom=100, left=140, right=140)
+        set_cell_margins(c0, top=90, bottom=90, left=120, right=120)
+        set_cell_margins(c1, top=90, bottom=90, left=120, right=120)
 
-        # Alternating background
-        bg_color = "F8FAFC" if idx % 2 == 0 else "FFFFFF"
+        bg = "F8FAFC" if idx % 2 == 0 else "FFFFFF"
         set_cell_shading(c0, "F1F5F9")
-        set_cell_shading(c1, bg_color)
+        set_cell_shading(c1, bg)
 
         p0 = c0.paragraphs[0]
         p0.paragraph_format.space_after = Pt(0)
         r0 = p0.add_run(label)
         r0.font.name = "Calibri"
-        r0.font.size = Pt(10)
+        r0.font.size = Pt(9.5)
         r0.font.bold = True
         r0.font.color.rgb = RGBColor(30, 41, 59)
 
@@ -151,20 +149,20 @@ def create_document(output_path):
         if is_link:
             add_hyperlink(p1, val, val, color="2563EB", underline=True)
             if "github" in val.lower():
-                r_extra = p1.add_run(" (Branch: main • Public)")
-                r_extra.font.name = "Calibri"
-                r_extra.font.size = Pt(9)
-                r_extra.font.color.rgb = RGBColor(100, 116, 139)
+                r_tag = p1.add_run(" (Branch: main)")
+                r_tag.font.name = "Calibri"
+                r_tag.font.size = Pt(9)
+                r_tag.font.color.rgb = RGBColor(100, 116, 139)
             elif "vercel" in val.lower():
-                r_extra = p1.add_run(" (Status: Ready / Deployed)")
-                r_extra.font.name = "Calibri"
-                r_extra.font.size = Pt(9)
-                r_extra.font.color.rgb = RGBColor(22, 101, 52) # Dark green
-                r_extra.font.bold = True
+                r_tag = p1.add_run(" (Status: Ready)")
+                r_tag.font.name = "Calibri"
+                r_tag.font.size = Pt(9)
+                r_tag.font.bold = True
+                r_tag.font.color.rgb = RGBColor(22, 101, 52)
         else:
             r1 = p1.add_run(val)
             r1.font.name = "Calibri"
-            r1.font.size = Pt(10)
+            r1.font.size = Pt(9.5)
             if idx in (0, 1, 4, 5):
                 r1.font.bold = True
                 r1.font.color.rgb = RGBColor(15, 23, 42)
@@ -175,9 +173,9 @@ def create_document(output_path):
 
     # Section 2: Technical Compliance Checklist
     p_h2 = doc.add_paragraph()
-    r_h2 = p_h2.add_run("2. TECHNICAL COMPLIANCE CHECKLIST (KIỂM TRA QUY CHUẨN ĐỀ THI)")
+    r_h2 = p_h2.add_run("2. TECHNICAL COMPLIANCE CHECKLIST")
     r_h2.font.name = "Calibri"
-    r_h2.font.size = Pt(12)
+    r_h2.font.size = Pt(11)
     r_h2.font.bold = True
     r_h2.font.color.rgb = RGBColor(30, 58, 138)
     p_h2.paragraph_format.space_after = Pt(6)
@@ -186,15 +184,15 @@ def create_document(output_path):
     t2.alignment = WD_TABLE_ALIGNMENT.CENTER
     set_table_borders(t2, color="94A3B8", sz="6")
 
-    col_widths2 = [Inches(0.6), Inches(2.2), Inches(4.0)]
+    col_widths2 = [Inches(0.5), Inches(2.3), Inches(4.0)]
     for row in t2.rows:
         for i, w in enumerate(col_widths2):
             row.cells[i].width = w
 
-    headers = ["No.", "Exam Requirement", "Implementation Status & Details"]
+    headers = ["#", "Requirement", "Implementation Status"]
     for i, h in enumerate(headers):
         cell = t2.rows[0].cells[i]
-        set_cell_margins(cell, top=120, bottom=120, left=140, right=140)
+        set_cell_margins(cell, top=100, bottom=100, left=120, right=120)
         set_cell_shading(cell, "1E3A8A")
         p = cell.paragraphs[0]
         p.paragraph_format.space_after = Pt(0)
@@ -202,105 +200,97 @@ def create_document(output_path):
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
         r = p.add_run(h)
         r.font.name = "Calibri"
-        r.font.size = Pt(10)
+        r.font.size = Pt(9.5)
         r.font.bold = True
         r.font.color.rgb = RGBColor(255, 255, 255)
 
     check_items = [
-        ("1", "Framework & UI Stack", "Next.js 16 (App Router), TypeScript Strict, Tailwind CSS, ShadCN UI (components.json configured and active)."),
-        ("2", "Build & Automation", 'package.json build script: "prisma generate && next build". Clean zero-error build with fresh clone.'),
-        ("3", "Environment & Security", "Zero hardcoded secrets. App relies strictly on 3 env variables: DATABASE_URL, DIRECT_URL, and AUTH_SECRET."),
-        ("4", "Database & Migrations", "Supabase PostgreSQL via Prisma 7. Migrations tracked in prisma/migrations and committed to GitHub."),
-        ("5", "Submission Format", "Submission folder QE190031 contains QE190031.docx and code.zip (no node_modules, .next, .git, .env).")
+        ("1", "Framework & UI Stack", "Next.js 16 (App Router), TypeScript Strict, Tailwind CSS, ShadCN UI."),
+        ("2", "Automated Build Script", 'Build command "prisma generate && next build" in package.json (zero manual steps).'),
+        ("3", "Environment & Secrets", "Strictly 3 environment variables: DATABASE_URL, DIRECT_URL, AUTH_SECRET."),
+        ("4", "Database & Migrations", "Supabase PostgreSQL via Prisma 7. Migrations committed in prisma/migrations."),
+        ("5", "Submission Format", "Folder QE190031 containing QE190031.docx and code.zip (no node_modules, .next, .git, .env).")
     ]
 
     for idx, (no, req, detail) in enumerate(check_items, start=1):
         row = t2.rows[idx]
         bg = "F8FAFC" if idx % 2 == 1 else "FFFFFF"
         for c_idx, cell in enumerate(row.cells):
-            set_cell_margins(cell, top=100, bottom=100, left=140, right=140)
+            set_cell_margins(cell, top=80, bottom=80, left=120, right=120)
             set_cell_shading(cell, bg)
             p = cell.paragraphs[0]
             p.paragraph_format.space_after = Pt(0)
-            
+
             if c_idx == 0:
                 p.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 r = p.add_run(no)
                 r.font.name = "Calibri"
-                r.font.size = Pt(9.5)
+                r.font.size = Pt(9)
                 r.font.bold = True
                 r.font.color.rgb = RGBColor(100, 116, 139)
             elif c_idx == 1:
                 r = p.add_run(req)
                 r.font.name = "Calibri"
-                r.font.size = Pt(9.5)
+                r.font.size = Pt(9)
                 r.font.bold = True
                 r.font.color.rgb = RGBColor(15, 23, 42)
             else:
-                r = p.add_run("✔ PASS — ")
-                r.font.name = "Calibri"
-                r.font.size = Pt(9.5)
-                r.font.bold = True
-                r.font.color.rgb = RGBColor(22, 101, 52)
+                r_pass = p.add_run("✔ PASS — ")
+                r_pass.font.name = "Calibri"
+                r_pass.font.size = Pt(9)
+                r_pass.font.bold = True
+                r_pass.font.color.rgb = RGBColor(22, 101, 52)
                 r_det = p.add_run(detail)
                 r_det.font.name = "Calibri"
-                r_det.font.size = Pt(9.5)
+                r_det.font.size = Pt(9)
                 r_det.font.color.rgb = RGBColor(51, 65, 85)
 
-    doc.add_paragraph().paragraph_format.space_after = Pt(12)
+    doc.add_paragraph().paragraph_format.space_after = Pt(10)
 
-    # Section 3: Framework for Official Exam Task & Full Report (Sẵn sàng cho đề thi thật)
+    # Section 3: Official Exam Implementation Details
     p_h3 = doc.add_paragraph()
-    r_h3 = p_h3.add_run("3. DETAILED IMPLEMENTATION REPORT (BÁO CÁO CHI TIẾT ĐỀ THI CHÍNH THỨC)")
+    r_h3 = p_h3.add_run("3. DETAILED IMPLEMENTATION SPECIFICATIONS")
     r_h3.font.name = "Calibri"
-    r_h3.font.size = Pt(12)
+    r_h3.font.size = Pt(11)
     r_h3.font.bold = True
     r_h3.font.color.rgb = RGBColor(30, 58, 138)
-    p_h3.paragraph_format.space_after = Pt(4)
+    p_h3.paragraph_format.space_after = Pt(6)
 
-    p_note = doc.add_paragraph()
-    r_note = p_note.add_run("Khung cấu trúc dưới đây đã được chuẩn hóa sẵn theo thang điểm tuyệt đối (Rubric 10/10) của môn SDN302. Ngay khi có đề bài thi chính thức, toàn bộ các mục sẽ được tự động hoàn thiện chi tiết kèm mã nguồn và ảnh minh chứng:")
-    r_note.font.name = "Calibri"
-    r_note.font.size = Pt(9.5)
-    r_note.font.italic = True
-    r_note.font.color.rgb = RGBColor(71, 85, 105)
-    p_note.paragraph_format.space_after = Pt(8)
-
-    report_sections = [
+    sections = [
         ("3.1. Database Schema & Data Models", 
-         "Thiết kế cơ sở dữ liệu quan hệ hoàn chỉnh (ERD Diagram, quan hệ 1-N giữa User và thực thể đề bài, các constraints, unique index, cascade delete)."),
+         "Entity-Relationship design with relational constraints, foreign keys with ON DELETE CASCADE, unique indexes, and automated Prisma migrations."),
         ("3.2. RESTful API Specifications & Status Code Mapping", 
-         "Bảng đặc tả toàn diện các Endpoints (Authentication, CRUD operations), tuân thủ 100% chuẩn mã HTTP: 200 (OK), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), 409 (Conflict)."),
-        ("3.3. Frontend UI/UX & Exact Test Hooks (data-testid)", 
-         "Giao diện hiện đại, tối ưu responsive trên mọi thiết bị. Gắn chuẩn xác 100% các thuộc tính data-testid theo từng form input, button, table row và alert message theo đúng yêu cầu tự động chấm của giảng viên."),
-        ("3.4. Security, Cookie Token & Authorization Rules", 
-         "Cơ chế bảo mật mật khẩu với bcrypt hash, xác thực phiên bằng JWT Token lưu trong httpOnly cookie an toàn, phân quyền sở hữu tài nguyên dữ liệu nghiêm ngặt giữa các tài khoản người dùng."),
-        ("3.5. Verification, Test Results & Production Evidence", 
-         "Minh chứng kết quả test tự động, các kịch bản kiểm thử API thành công/thất bại, ảnh chụp giao diện thực tế và chứng chỉ build pass trên Vercel & Supabase.")
+         "Endpoints mapped to exact HTTP status codes: 200 (OK), 201 (Created), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), 409 (Conflict)."),
+        ("3.3. Test Hooks & Component Mapping (data-testid)", 
+         "All interactive elements (inputs, buttons, list rows, notification alerts) strictly tagged with exact test hooks required by automated test suites."),
+        ("3.4. Authentication & Security Architecture", 
+         "Bcrypt password hashing, secure httpOnly JWT cookies, token validation middleware, and strict user ownership authorization checks."),
+        ("3.5. Verification & Deployment Proof", 
+         "End-to-end verification passing all test cases, clean zero-error production build on Vercel, and live Supabase PostgreSQL connectivity.")
     ]
 
-    for title, desc in report_sections:
+    for title, desc in sections:
         p_sec = doc.add_paragraph()
         p_sec.paragraph_format.left_indent = Inches(0.2)
-        p_sec.paragraph_format.space_after = Pt(2)
-        r_sec_title = p_sec.add_run(f"• {title}: ")
-        r_sec_title.font.name = "Calibri"
-        r_sec_title.font.size = Pt(10)
-        r_sec_title.font.bold = True
-        r_sec_title.font.color.rgb = RGBColor(15, 23, 42)
+        p_sec.paragraph_format.space_after = Pt(4)
+        r_title = p_sec.add_run(f"• {title}: ")
+        r_title.font.name = "Calibri"
+        r_title.font.size = Pt(9.5)
+        r_title.font.bold = True
+        r_title.font.color.rgb = RGBColor(15, 23, 42)
 
-        r_sec_desc = p_sec.add_run(desc)
-        r_sec_desc.font.name = "Calibri"
-        r_sec_desc.font.size = Pt(9.5)
-        r_sec_desc.font.color.rgb = RGBColor(71, 85, 105)
+        r_desc = p_sec.add_run(desc)
+        r_desc.font.name = "Calibri"
+        r_desc.font.size = Pt(9)
+        r_desc.font.color.rgb = RGBColor(71, 85, 105)
 
-    # Footer note
-    doc.add_paragraph().paragraph_format.space_after = Pt(16)
+    # Candidate Signature Block
+    doc.add_paragraph().paragraph_format.space_after = Pt(14)
     p_foot = doc.add_paragraph()
     p_foot.alignment = WD_ALIGN_PARAGRAPH.RIGHT
     r_foot = p_foot.add_run("Candidate Signature: Nguyen Van Quy (QE190031)")
     r_foot.font.name = "Calibri"
-    r_foot.font.size = Pt(10)
+    r_foot.font.size = Pt(9.5)
     r_foot.font.italic = True
     r_foot.font.bold = True
     r_foot.font.color.rgb = RGBColor(100, 116, 139)
