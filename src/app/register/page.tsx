@@ -136,14 +136,14 @@ export default function RegisterPage() {
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3.5">
               <p className="text-2xl sm:text-3xl font-medium text-slate-700 dark:text-slate-300">
-                FPT University Practical Exam
+                Start your reading log today
               </p>
               <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 leading-tight">
-                Create your account <span className="inline-flex items-center align-middle mx-1.5 text-sky-500"><Sparkles className="w-8 h-8 sm:w-10 sm:h-10 animate-pulse" /></span> for assessment
+                Create your account <span className="inline-flex items-center align-middle mx-1.5 text-blue-600"><Sparkles className="w-8 h-8 sm:w-10 sm:h-10 animate-pulse" /></span> and celebrate your reading
               </h1>
             </div>
             <p className="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed">
-              Register a candidate or test grader account directly into Supabase PostgreSQL for live grading.
+              Join ReadLog to log daily books, organize sessions into Fiction, Non-Fiction, Sci-Fi, Biography, and Other, and view instant reading statistics.
             </p>
           </div>
 
@@ -152,10 +152,10 @@ export default function RegisterPage() {
             <Card className="w-full max-w-[440px] border border-slate-100 dark:border-slate-800 shadow-2xl shadow-slate-900/10 bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden transition-all duration-300">
               <CardHeader className="pt-9 pb-4 px-8">
                 <CardTitle className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-                  Register to continue<span className="text-blue-500">.</span>
+                  Register to continue<span className="text-blue-600">.</span>
                 </CardTitle>
                 <CardDescription className="text-sm text-slate-400 dark:text-slate-500 pt-1">
-                  Create a new personal account in seconds
+                  Create your personal reading log account in seconds
                 </CardDescription>
               </CardHeader>
 
@@ -312,7 +312,7 @@ export default function RegisterPage() {
 
         {/* Bottom footer bar */}
         <div className="relative z-10 flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-100/80 dark:border-slate-800/80">
-          <span>SDN302 Practical Exam • FPT University</span>
+          <span>ReadLog • Personal Reading Tracker</span>
           <span className="hidden sm:inline">Protected by End-to-End JWT Session Token</span>
         </div>
 

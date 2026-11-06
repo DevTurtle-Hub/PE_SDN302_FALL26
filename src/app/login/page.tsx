@@ -119,14 +119,14 @@ export default function LoginPage() {
           <div className="lg:col-span-7 space-y-6">
             <div className="space-y-3.5">
               <p className="text-2xl sm:text-3xl font-medium text-slate-700 dark:text-slate-300">
-                FPT University Practical Exam
+                Track your reading journey
               </p>
               <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-50 leading-tight">
-                Secure Authentication <span className="inline-flex items-center align-middle mx-1.5 text-sky-500"><Sparkles className="w-8 h-8 sm:w-10 sm:h-10 animate-pulse" /></span> and Fullstack Architecture
+                Build daily habits <span className="inline-flex items-center align-middle mx-1.5 text-blue-600"><Sparkles className="w-8 h-8 sm:w-10 sm:h-10 animate-pulse" /></span> with live reading logs
               </h1>
             </div>
             <p className="text-base sm:text-lg text-slate-500 dark:text-slate-400 max-w-xl leading-relaxed">
-              Enterprise fullstack application with Next.js 16 App Router, PostgreSQL database, and automated testing suites.
+              Log minutes spent reading, categorize books by genre, save notes, star your favorite sessions, and explore real-time summaries.
             </p>
           </div>
 
@@ -135,10 +135,10 @@ export default function LoginPage() {
             <Card className="w-full max-w-[440px] border border-slate-100 dark:border-slate-800 shadow-2xl shadow-slate-900/10 bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden transition-all duration-300">
               <CardHeader className="pt-9 pb-4 px-8">
                 <CardTitle className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-                  Log in to continue<span className="text-blue-500">.</span>
+                  Log in to continue<span className="text-blue-600">.</span>
                 </CardTitle>
                 <CardDescription className="text-sm text-slate-400 dark:text-slate-500 pt-1">
-                  Enter your credentials to access your account
+                  Enter your credentials to access your personal reading journal
                 </CardDescription>
               </CardHeader>
 
@@ -252,7 +252,7 @@ export default function LoginPage() {
 
         {/* Bottom footer bar */}
         <div className="relative z-10 flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-100/80 dark:border-slate-800/80">
-          <span>SDN302 Practical Exam • FPT University</span>
+          <span>ReadLog • Personal Reading Tracker</span>
           <span className="hidden sm:inline">Protected by End-to-End JWT Session Token</span>
         </div>
 

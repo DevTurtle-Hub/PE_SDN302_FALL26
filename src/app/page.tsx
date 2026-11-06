@@ -1,60 +1,84 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { AuthWaveBackground } from "@/components/auth-wave-background";
-import { BookOpen, ArrowRight, Clock, Star, BarChart3, CheckCircle2 } from "lucide-react";
+import { BookOpen, ArrowRight, Clock, Star, BarChart3, Sparkles } from "lucide-react";
 
 export default function HomePage() {
   return (
     <div className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center p-4 sm:p-8 lg:p-12 overflow-hidden bg-slate-50 dark:bg-slate-950">
-      {/* Harmonious Blue Ambient Background */}
+      {/* Harmonious Blue Wave Background */}
       <AuthWaveBackground />
 
-      <div className="relative z-10 w-full max-w-6xl rounded-[2.5rem] bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-blue-600/5 backdrop-blur-xl p-8 sm:p-14 lg:p-16 space-y-12">
+      <div className="relative z-10 w-full max-w-6xl rounded-[2.5rem] bg-white/92 dark:bg-slate-900/92 border border-slate-200/90 dark:border-slate-800 shadow-xl shadow-blue-600/5 backdrop-blur-xl p-8 sm:p-12 lg:p-16 space-y-12">
         
-        {/* Main Hero Header */}
-        <div className="text-center space-y-6 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider">
-            <BookOpen className="w-4 h-4 text-blue-600" />
-            <span>Reading Session Tracker</span>
+        {/* Main Hero Section: Left Text + Right 3D Modern Illustration */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Hero Text Column */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200/80 dark:border-blue-800 text-blue-700 dark:text-blue-300 text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-4 h-4 text-blue-600" />
+              <span>Personal Reading Journal & Tracker</span>
+            </div>
+
+            <div className="space-y-3">
+              <h1
+                data-testid="home-title"
+                className="text-5xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-slate-50 leading-tight"
+              >
+                ReadLog
+              </h1>
+              <p className="text-xl sm:text-2xl font-semibold text-slate-700 dark:text-slate-200">
+                Turn your reading habit into a clear, measurable daily routine.
+              </p>
+            </div>
+
+            <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-xl">
+              Track daily books and minutes read, sort across Fiction, Non-Fiction, Sci-Fi, Biography, and Other, bookmark your favorite sessions, and view real-time genre summaries.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Link href="/register">
+                <Button
+                  size="lg"
+                  className="rounded-2xl px-8 h-13 text-base font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/25 flex items-center gap-2.5 transition-all cursor-pointer"
+                >
+                  <span>Get Started</span>
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+              <Link href="/login">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="rounded-2xl px-8 h-13 text-base font-bold border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all cursor-pointer"
+                >
+                  Sign In
+                </Button>
+              </Link>
+            </div>
           </div>
 
-          <h1
-            data-testid="home-title"
-            className="text-5xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-slate-50"
-          >
-            ReadLog
-          </h1>
-
-          <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-2xl mx-auto">
-            A focused web application to record your daily reading sessions, track minutes read, categorize by genre, star favorites, and review real-time breakdowns.
-          </p>
-
-          {/* Action Buttons - Prominent & Clear */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-3">
-            <Link href="/register">
-              <Button
-                size="lg"
-                className="rounded-2xl px-8 h-13 text-base font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/25 flex items-center gap-2.5 transition-all cursor-pointer"
-              >
-                <span>Get Started</span>
-                <ArrowRight className="w-5 h-5" />
-              </Button>
-            </Link>
-            <Link href="/login">
-              <Button
-                variant="outline"
-                size="lg"
-                className="rounded-2xl px-8 h-13 text-base font-bold border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-850 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 transition-all cursor-pointer"
-              >
-                Sign In
-              </Button>
-            </Link>
+          {/* Right Hero Image Column: 3D Modern Floating Open Book */}
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="relative w-full max-w-[420px] aspect-square rounded-[2rem] overflow-hidden border border-slate-200/90 dark:border-slate-800 shadow-2xl shadow-blue-600/15 group">
+              <Image
+                src="/hero-reading.jpg"
+                alt="ReadLog Modern 3D Open Book Illustration"
+                fill
+                priority
+                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              />
+              {/* Subtle ambient border shine */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-transparent to-white/20 pointer-events-none" />
+            </div>
           </div>
         </div>
 
-        {/* 3 Large, Clear Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+        {/* 3 Large, Clean Feature Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
           {/* Card 1 */}
           <Card className="p-7 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 shadow-sm hover:shadow-md transition-shadow">
             <CardHeader className="p-0 space-y-3.5">
